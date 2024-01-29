@@ -1,0 +1,8 @@
+{
+  "short_name": "React ThreeJS Vercel App",
+  "name": "Example ThreeJS with React deploayed via Vercel",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
