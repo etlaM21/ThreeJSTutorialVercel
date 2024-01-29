@@ -93,6 +93,8 @@ const orbSphere = new THREE.Mesh( orb, orbMaterial );
 scene.add( orbSphere );
 
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.setSize( width, height );
 renderer.setAnimationLoop( animation );
 
