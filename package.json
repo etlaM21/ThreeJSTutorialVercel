@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@react-three/fiber": "^8.15.15",
+    "@react-three/postprocessing": "^2.15.12",
+    "postprocessing": "^6.34.1",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "three": "^0.160.1"
+  }
+}

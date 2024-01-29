@@ -1,10 +1,34 @@
-import React, { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
+import * as THREE from "three";
 import { Canvas } from '@react-three/fiber';
+import { EffectComposer, Bloom, Noise, Vignette, Autofocus, ChromaticAberration } from "@react-three/postprocessing";
+import { BlendFunction } from 'postprocessing'
 import Model from './Cave';
 import Spotlights from './Spotlights';
 import Orb from './Orb';
+import ScrollCamera from './ScrollCamera';
 
 function App() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+      const position = window.scrollY ;
+      const canvStart = document.getElementById("threeCanv").offsetTop;
+      const canvEnd = canvStart + document.getElementById("threeCanv").offsetHeight;
+      let canvScrollRatio = 0;
+      if((position + window.innerHeight) - canvStart > 0 && position < canvEnd) {
+        canvScrollRatio = ((position + window.innerHeight) - canvStart) / (canvEnd);
+      }
+      setScrollPosition(canvScrollRatio);
+  };
+  
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div className="someTextWrapper">
@@ -17,21 +41,40 @@ function App() {
         <p>The path to discovering this sacred inner space is unique for each person, as spirituality is a deeply personal journey. It often involves practices such as meditation, contemplation, and mindfulness, guiding individuals to turn their gaze inward. By quieting the mind and tuning into the rhythm of their breath, many find access to a profound realm where the essence of their true selves unfolds.</p>
         </div>
       </div>
-      <Canvas
-        id="threeCanv"
-        camera={{ position: [0, 0, 3], fov: 100 }}
-        style={{
-          backgroundColor: '#000000',
-          width: '100%',
-          height: '75vh',
-        }}
-    >
-        <Spotlights />
-        <Suspense fallback={null}>
-          <Model position={[0, 0, 0]} scale={[1, -1, -1]} rotation={[Math.PI * 1, Math.PI * 0.5, 0]} />
-        </Suspense>
-        <Orb />
-    </Canvas>
+        <Canvas
+          id="threeCanv"
+          // camera={{ position: [0, 0, 3 + (scrollPosition - 0.5) * 3], fov: 100 }}
+          style={{
+            backgroundColor: '#000000',
+            width: '100%',
+            height: '75vh',
+          }}
+          colorManagement
+          gl={{
+            powerPreference: "high-performance",
+            alpha: false,
+            antialias: false,
+            stencil: false,
+            depth: false
+          }}
+      >
+          <ScrollCamera scrollPosition={scrollPosition} />
+            <Spotlights />
+            <Suspense fallback={null}>
+              <Model position={[0, 0, 0]} scale={[1, -1, -1]} rotation={[Math.PI * 1, Math.PI * 0.5, 0]} />
+            </Suspense>
+            <Orb />
+            <EffectComposer>
+              <Bloom luminanceThreshold={0.1} luminanceSmoothing={0.1} height={512} />
+              <Autofocus target={[0,0,0]} focalLength={0.02} bokehScale={0.5} />
+              <ChromaticAberration
+                blendFunction={BlendFunction.NORMAL} // blend mode
+                offset={[0.0005, 0.0005]} // color offset
+              />
+              <Noise opacity={0.02} />
+              <Vignette darkness={1} />
+            </EffectComposer>
+      </Canvas>
     <div className="someTextWrapper">
       <div className="someText">
         <h1>Navigating the Spiritual Landscape</h1>

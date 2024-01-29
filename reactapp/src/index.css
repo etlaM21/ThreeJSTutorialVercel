@@ -22,7 +22,7 @@ code {
 }
 
 .someText {
-  width: 100%;
+  width: calc(100% - 4rem - 2px);
   max-width: 960px;
   margin: 0 auto;
   padding: 0 2rem;
