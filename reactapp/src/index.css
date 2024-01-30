@@ -14,6 +14,31 @@ code {
     monospace;
 }
 
+header {
+  text-align: center;
+  padding-top: 50px;
+}
+
+header button{
+  height: 100%;
+  font-size: 1.5rem;
+  padding: 0.5rem 50px;
+  border-radius: 10px;
+  margin: 25px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
+
+header button.fill, header button.outline:hover{
+  background-color: white;
+  color: black;
+}
+
+header button.outline, header button.fill:hover{
+  background-color: black;
+  color: white;
+}
 
 .someTextWrapper {
   min-height: 75vh;

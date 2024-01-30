@@ -8,6 +8,8 @@ import Spotlights from './Spotlights';
 import Orb from './Orb';
 import ScrollCamera from './ScrollCamera';
 
+import NavButton from './NavButton';
+
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
@@ -31,6 +33,11 @@ function App() {
 
   return (
     <>
+      <header>
+        <NavButton theClass="fill" theText="Home" />
+        <NavButton theClass="outline" theText="About" />
+        <NavButton theClass="outline" theText="Contact" />
+      </header>
       <div className="someTextWrapper">
        <div className="someText">
         <h1>Embarking on the Spiritual Journey</h1>
