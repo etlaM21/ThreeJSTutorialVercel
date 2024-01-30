@@ -9,13 +9,13 @@
 - React components are JavaScript functions
   - These functions return DOM elements
     - `return <h1>Hello World!</h1>`
-  - Because they are functions, they can be classes which extend other components!
-- Components can have properties and states, the latter can change throughout a components lifecycle
-  - example: total price for items in a shopping cart
+  - Because they are functions, they can be classes that extend other components!
+- Components can have properties and states, the latter can change throughout the lifecycle of a component
+  - For example: the total price for items in a shopping cart
 - Components are written in JSX (JavaScript XML)
   - JSX is not JavaScript nor HTML
   - JSX is a XML syntax extension to JavaScript that also comes with the full power of ES6 
-  - like HTML, JSX tags can have a tag names, attributes, and children
+  - like HTML, JSX tags can have tag names, attributes, and children
     - If an attribute is wrapped in curly braces, the value is a JavaScript expression
 - There are _a lot_ of components that can be installed via npm
   - These need to be imported, for example ThreeJS `
@@ -70,6 +70,6 @@ Of course, components can be far more complex!
 
 - ReactDOM renders the DOM made up of the different components
   - ALL components must be within ONE single node (`root` node)
-  -  `ReactDOM.render(element, document.getElementById('root'));` would render an element in root. Witihin the element can be multiple components
+  -  `ReactDOM.render(element, document.getElementById('root'));` would render an element in root. Within the element can be multiple components
 - React elements are immutable
   - BUT: React can re-render elements. This way states can change and display something else in their lifecycle
